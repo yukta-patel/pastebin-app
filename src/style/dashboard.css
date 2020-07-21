@@ -1,0 +1,32 @@
+.dashboardDiv {
+  margin: 7rem auto;
+  max-width: 1000px;
+  width: 90%;
+}
+
+.row {
+  margin: 0;
+}
+
+.button {
+  border-radius: 0;
+  padding: 0.2rem 0.8rem;
+}
+
+.table {
+  margin-top: 0.5rem;
+}
+
+.modalDiv {
+  border: 0;
+}
+
+.modal-button {
+  border-radius: 0;
+  padding: 0.2rem 0.8rem;
+}
+
+/* .selectDiv {
+  background-color: yellow;
+  height: 10rem;
+} */
