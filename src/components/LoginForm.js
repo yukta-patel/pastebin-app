@@ -4,12 +4,9 @@ import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers";
 import { Container, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import * as Yup from "yup";
-import "bootstrap/dist/css/bootstrap.css";
 import "../style/login.css";
 import { LoginUser } from "../redux/actions/_action";
 import { useDispatch } from "react-redux";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 const FormSchema = Yup.object().shape({
   username: Yup.string().required(),
@@ -25,19 +22,19 @@ const Login = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    dispatch(LoginUser(data.username, data.password, history), notify());
+    dispatch(LoginUser(data.username, data.password, history));
   };
 
-  const notify = () =>
-    toast.success("Login Success", {
-      position: "top-center",
-      autoClose: 6000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: false,
-      progress: undefined,
-    });
+  // const notify = () =>
+  //   toast.success("Login Success", {
+  //     position: "top-center",
+  //     autoClose: 6000,
+  //     hideProgressBar: false,
+  //     closeOnClick: true,
+  //     pauseOnHover: true,
+  //     draggable: false,
+  //     progress: undefined,
+  //   });
 
   return (
     <Container className="loginDiv">
@@ -78,7 +75,6 @@ const Login = () => {
           Submit
         </Button>
       </Form>
-      <ToastContainer />
     </Container>
   );
 };
