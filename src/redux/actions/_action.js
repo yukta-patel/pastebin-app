@@ -3,8 +3,8 @@ import { toast } from "react-toastify";
 
 export const LoginUser = (identifier, password, history) => {
   // axios.post("/",{},{headers:{'Authorization':`Bearer ${token}`}})
-  return (dispach) => {
-    dispach({ type: "LOGIN_PENDING" });
+  return (dispatch) => {
+    dispatch({ type: "LOGIN_PENDING" });
 
     axios
       .post("https://pastebindemo.herokuapp.com/auth/local", {
@@ -14,7 +14,7 @@ export const LoginUser = (identifier, password, history) => {
       .then((res) => {
         localStorage.setItem("token", res.data.jwt);
         console.log(res.data.jwt);
-        dispach({
+        dispatch({
           type: "LOGIN_SUCCESS",
           // identifier: res.data.identifier,
           // password: res.data.password,
@@ -39,6 +39,33 @@ export const LoginUser = (identifier, password, history) => {
           pauseOnHover: true,
           draggable: true,
         });
+      });
+  };
+};
+
+export const AddPaste = (newpaste, expiration, exposure, title) => {
+  let token = localStorage.getItem("token");
+  console.log(token);
+  return (dispatch) => {
+    dispatch({ type: "ADDPASTE_PENDING" });
+    axios
+      .post("https://pastebindemo.herokuapp.com/pastes", {
+        body: {
+          newpaste: newpaste,
+          expiration: expiration,
+          exposure: exposure,
+          title: title,
+        },
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        dispatch({
+          type: "ADDPASTE_SUCCESS",
+          pastes: res.pastes,
+        });
+      })
+      .catch((error) => {
+        console.log(error.response.data.error);
       });
   };
 };

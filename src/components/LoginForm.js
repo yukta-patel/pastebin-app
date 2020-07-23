@@ -25,19 +25,9 @@ const Login = () => {
     dispatch(LoginUser(data.username, data.password, history));
   };
 
-  // const notify = () =>
-  //   toast.success("Login Success", {
-  //     position: "top-center",
-  //     autoClose: 6000,
-  //     hideProgressBar: false,
-  //     closeOnClick: true,
-  //     pauseOnHover: true,
-  //     draggable: false,
-  //     progress: undefined,
-  //   });
-
   return (
     <Container className="loginDiv">
+      <h2 className="text-center">Login</h2>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <FormGroup>
           <Label>Username</Label>
