@@ -2,7 +2,6 @@ import axios from "axios";
 import { toast } from "react-toastify";
 
 export const LoginUser = (identifier, password, history) => {
-  // axios.post("/",{},{headers:{'Authorization':`Bearer ${token}`}})
   return (dispatch) => {
     dispatch({ type: "LOGIN_PENDING" });
 
@@ -16,8 +15,7 @@ export const LoginUser = (identifier, password, history) => {
         console.log(res.data.jwt);
         dispatch({
           type: "LOGIN_SUCCESS",
-          // identifier: res.data.identifier,
-          // password: res.data.password,
+          data: res.data,
         });
         toast.success("successfully Login", {
           position: "top-center",
@@ -43,29 +41,63 @@ export const LoginUser = (identifier, password, history) => {
   };
 };
 
-export const AddPaste = (newpaste, expiration, exposure, title) => {
+export const AddPaste = (newpaste, expiration, exposure, title, setModal) => {
   let token = localStorage.getItem("token");
   console.log(token);
   return (dispatch) => {
     dispatch({ type: "ADDPASTE_PENDING" });
     axios
-      .post("https://pastebindemo.herokuapp.com/pastes", {
-        body: {
-          newpaste: newpaste,
-          expiration: expiration,
-          exposure: exposure,
+      .post(
+        "https://pastebindemo.herokuapp.com/pastes",
+        {
+          content: newpaste,
+          Expiration: expiration,
+          Exposure: exposure,
           title: title,
         },
-        headers: { Authorization: `Bearer ${token}` },
-      })
+        { headers: { Authorization: `Bearer ${token}` } }
+      )
       .then((res) => {
         dispatch({
           type: "ADDPASTE_SUCCESS",
-          pastes: res.pastes,
         });
+        dispatch(FetchPastes());
+        toast.success("Paste added successfully", {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+        setModal(false);
       })
+
       .catch((error) => {
-        console.log(error.response.data.error);
+        console.log(error.response.data.message);
+        toast.error(error.response.data.message, {
+          position: "top-center",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+        });
+      });
+  };
+};
+
+export const FetchPastes = () => {
+  let token = localStorage.getItem("token");
+  console.log(token);
+  return (dispatch) => {
+    dispatch({ type: "FETCHPASTES_PENDING" });
+    axios
+      .get("https://pastebindemo.herokuapp.com/pastes", {
+        headers: { Authorization: `Bearer ${token}` },
+      })
+      .then((res) => {
+        dispatch({ type: "FETCHPASTES_SUCCESS", pastes: res.data });
       });
   };
 };

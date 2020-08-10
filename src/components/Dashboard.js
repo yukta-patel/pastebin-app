@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Table,
   Container,
@@ -7,7 +7,6 @@ import {
   Modal,
   ModalHeader,
   ModalBody,
-  ModalFooter,
   Form,
   FormGroup,
   Label,
@@ -15,10 +14,11 @@ import {
 } from "reactstrap";
 import "../style/dashboard.css";
 import { useForm, Controller } from "react-hook-form";
-import { AddPaste } from "../redux/actions/_action";
-import { useDispatch } from "react-redux";
+import { AddPaste, FetchPastes } from "../redux/actions/_action";
+import { useDispatch, useSelector } from "react-redux";
 import { yupResolver } from "@hookform/resolvers";
 import * as Yup from "yup";
+import moment from "moment";
 
 const PasteSchema = Yup.object().shape({
   newPaste: Yup.string().required("New Paste is a required field"),
@@ -35,8 +35,17 @@ const Dashboard = () => {
   });
   const dispatch = useDispatch();
 
+  const { loading, pastes } = useSelector((state) => ({
+    loading: state.LoginReducer.fetchPaste.loading,
+    pastes: state.LoginReducer.fetchPaste.pastes,
+  }));
+
+  useEffect(() => {
+    dispatch(FetchPastes());
+  }, [dispatch]);
+
   const onSubmit = (data) => {
-    console.log(data);
+    console.log(data.newPaste);
     dispatch(
       AddPaste(
         data.newPaste,
@@ -60,32 +69,26 @@ const Dashboard = () => {
       <Table striped className="table">
         <thead>
           <tr>
-            <th>#</th>
             <th>Name/Title</th>
             <th>Added</th>
             <th>Expiry Time</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
-        </tbody>
+
+        {pastes !== null &&
+          pastes
+            .slice(0)
+            .sort(
+              (item, index) =>
+                new Date(index.created_at) - new Date(item.created_at)
+            )
+            .map((paste) => (
+              <tr key={paste.id}>
+                <td>{paste.title}</td>
+                <td>{moment(paste.created_at).format("MMMM Do, YYYY")}</td>
+                <td>{paste.Expiration}</td>
+              </tr>
+            ))}
       </Table>
 
       <Modal isOpen={modal} toggle={toggle} className="modalDiv">
@@ -95,7 +98,6 @@ const Dashboard = () => {
           <Form onSubmit={handleSubmit(onSubmit)}>
             <FormGroup>
               <Label>New Paste</Label>
-              {/* <Input type="textarea" name="newPaste" /> */}
               <Controller
                 as={Input}
                 control={control}
@@ -120,15 +122,8 @@ const Dashboard = () => {
                 className={errors && errors.pasteExpiration ? "is-invalid" : ""}
               >
                 <option>Select Paste Expiration</option>
-                <option>Never</option>
-                <option>10 Minutes</option>
-                <option>1 Hour</option>
-                <option>1 Day</option>
-                <option>1 Week</option>
-                <option>2 Weeks</option>
-                <option>1 Month</option>
-                <option>6 Months</option>
-                <option>1 Year</option>
+                <option>aminute</option>
+                <option>ahours</option>
               </Controller>
               {errors.pasteExpiration && (
                 <span className="errorMsg">
@@ -136,6 +131,7 @@ const Dashboard = () => {
                 </span>
               )}
             </FormGroup>
+
             <FormGroup>
               <Label>Paste Exposure</Label>
               <Controller
@@ -146,9 +142,9 @@ const Dashboard = () => {
                 className={errors && errors.pasteExposure ? "is-invalid" : ""}
               >
                 <option>Select Paste Exposure</option>
-                <option>Public</option>
-                <option>Private</option>
-                <option>Unlisted</option>
+                <option>public</option>
+                <option>private</option>
+                <option>unlisted</option>
               </Controller>
               {errors.pasteExposure && (
                 <span className="errorMsg">{errors.pasteExposure.message}</span>

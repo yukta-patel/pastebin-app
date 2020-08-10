@@ -2,6 +2,7 @@ const initialState = {
   loading: false,
   data: null,
   addPaste: { loading: false, pastes: null },
+  fetchPaste: { loading: false, pastes: null },
 };
 
 const LoginReducer = (state = initialState, action) => {
@@ -14,6 +15,16 @@ const LoginReducer = (state = initialState, action) => {
       return { ...state, addPaste: { loading: true, pastes: null } };
     case "ADDPASTE_SUCCESS":
       return { ...state, addPaste: { loading: false, pastes: action.pastes } };
+    case "FETCHPASTES_PENDING":
+      return {
+        ...state,
+        fetchPaste: { loading: true, pastes: null },
+      };
+    case "FETCHPASTES_SUCCESS":
+      return {
+        ...state,
+        fetchPaste: { loading: false, pastes: action.pastes },
+      };
     default:
       return { ...state };
   }
