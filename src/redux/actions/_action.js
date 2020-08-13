@@ -74,6 +74,7 @@ export const AddPaste = (newpaste, expiration, exposure, title, setModal) => {
       })
 
       .catch((error) => {
+        setModal(true);
         console.log(error.response.data.message);
         toast.error(error.response.data.message, {
           position: "top-center",

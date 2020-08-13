@@ -1,5 +1,5 @@
 import React from "react";
-import { useHistory } from "react-router-dom";
+import { useHistory, Redirect } from "react-router-dom";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers";
 import { Container, Button, Form, FormGroup, Label, Input } from "reactstrap";
@@ -20,12 +20,17 @@ const Login = () => {
     resolver: yupResolver(FormSchema),
   });
 
+  let token = localStorage.getItem("token");
+  console.log(token);
+
   const onSubmit = (data) => {
     console.log(data);
     dispatch(LoginUser(data.username, data.password, history));
   };
 
-  return (
+  return token ? (
+    <Redirect to="/dashboard" />
+  ) : (
     <Container className="loginDiv">
       <h2 className="text-center">Login</h2>
       <Form onSubmit={handleSubmit(onSubmit)}>

@@ -51,7 +51,8 @@ const Dashboard = () => {
         data.newPaste,
         data.pasteExpiration,
         data.pasteExposure,
-        data.pasteTitle
+        data.pasteTitle,
+        setModal
       )
     );
   };
