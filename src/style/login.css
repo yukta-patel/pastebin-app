@@ -2,13 +2,13 @@
   max-width: 500px;
   width: 90%;
   margin: 7rem auto;
-  padding: 2rem;
+  padding: 3rem;
   background-color: rgb(218, 240, 248);
 }
 
-.button {
-  border-radius: 5px;
-  padding: 0.2rem 0.8rem !important;
+.submit-btn {
+  border-radius: 0;
+  padding: 0.1rem 0.8rem;
 }
 
 .errorMsg {

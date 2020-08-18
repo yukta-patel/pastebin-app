@@ -2,7 +2,7 @@ import React from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Home from "./view/Home";
-import { Dashboard } from "./components";
+import { Dashboard, PrivateRouter } from "./components";
 import { Provider } from "react-redux";
 import { store } from "./redux/store";
 import { ToastContainer } from "react-toastify";
@@ -14,7 +14,8 @@ function App() {
       <Router>
         <Switch>
           <Route path="/" component={Home} exact={true} />
-          <Route path="/dashboard" component={Dashboard} />
+          {/* <Route path="/dashboard" component={Dashboard} /> */}
+          <PrivateRouter path="/dashboard" component={Dashboard} />
         </Switch>
       </Router>
       <ToastContainer />

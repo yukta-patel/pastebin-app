@@ -5,7 +5,7 @@ import { yupResolver } from "@hookform/resolvers";
 import { Container, Button, Form, FormGroup, Label, Input } from "reactstrap";
 import * as Yup from "yup";
 import "../style/login.css";
-import { LoginUser } from "../redux/actions/_action";
+import { LoginUser } from "../redux/login/_actions";
 import { useDispatch } from "react-redux";
 
 const FormSchema = Yup.object().shape({
@@ -21,10 +21,8 @@ const Login = () => {
   });
 
   let token = localStorage.getItem("token");
-  console.log(token);
 
   const onSubmit = (data) => {
-    console.log(data);
     dispatch(LoginUser(data.username, data.password, history));
   };
 
@@ -66,7 +64,7 @@ const Login = () => {
           )}
         </FormGroup>
 
-        <Button className="button" color="primary">
+        <Button className="submit-btn" color="primary">
           Submit
         </Button>
       </Form>
