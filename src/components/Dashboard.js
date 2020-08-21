@@ -246,13 +246,6 @@ const Dashboard = () => {
                 {singlePaste !== null && (
                   <Form
                     onSubmit={handleSubmit(onSubmitUpdate)}
-                    // onSubmit={() =>
-                    //   handleSubmit(onSubmitUpdate({ id: "{singlePaste.id}" }))
-                    // }
-                    // onSubmit={handleSubmit(() => {
-                    //   onSubmitUpdate({ id: singlePaste.id });
-                    // })}
-                  >
                     <FormGroup>
                       <Label>Paste Name/Title</Label>
                       <Controller
