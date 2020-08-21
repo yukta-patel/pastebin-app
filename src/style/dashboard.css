@@ -62,10 +62,6 @@
   padding: 0.2rem 0.8rem;
 }
 
-/* Table {
-  text-align: center;
-} */
-
 td {
   word-break: break-all;
   width: 10%;
@@ -83,7 +79,7 @@ td {
   .pastebin-logo {
     height: 10%;
     width: 10%;
-    opacity: 0.3;
+    opacity: 0.2;
   }
   .logo-text {
     font-size: 0.2rem;
@@ -106,7 +102,7 @@ td {
   .pastebin-logo {
     height: 15%;
     width: 15%;
-    opacity: 0.3;
+    opacity: 0.2;
   }
   .logo-text {
     font-size: 0.5rem;
@@ -129,7 +125,7 @@ td {
   .pastebin-logo {
     height: 15%;
     width: 15%;
-    opacity: 0.3;
+    opacity: 0.2;
   }
   .logo-text {
     font-size: 1.1rem;

@@ -244,8 +244,7 @@ const Dashboard = () => {
             ) : (
               <>
                 {singlePaste !== null && (
-                  <Form
-                    onSubmit={handleSubmit(onSubmitUpdate)}
+                  <Form onSubmit={handleSubmit(onSubmitUpdate)}>
                     <FormGroup>
                       <Label>Paste Name/Title</Label>
                       <Controller
