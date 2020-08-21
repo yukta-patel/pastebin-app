@@ -14,7 +14,6 @@ function App() {
       <Router>
         <Switch>
           <Route path="/" component={Home} exact={true} />
-          {/* <Route path="/dashboard" component={Dashboard} /> */}
           <PrivateRouter path="/dashboard" component={Dashboard} />
         </Switch>
       </Router>
