@@ -11,6 +11,8 @@ import {
 } from "reactstrap";
 import { useHistory } from "react-router-dom";
 import logo from "../images/pastebin-logo.jpg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
   const history = useHistory();
@@ -40,6 +42,9 @@ const Header = () => {
         <Nav className="ml-auto" navbar>
           <Col className="float-right">
             <NavbarText className="username">{username}</NavbarText>
+            <NavbarText className="user-icon">
+              <FontAwesomeIcon icon={faUser} />
+            </NavbarText>
           </Col>
           <NavbarText>
             <Button className="button" color="primary" onClick={logout}>

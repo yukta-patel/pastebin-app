@@ -20,35 +20,14 @@
 .username {
   font-size: 1.2rem;
   float: right;
-  padding-right: 1rem;
+  padding-right: 1.5rem;
 }
 
-@media only screen and (min-width: 375px) and (max-device-width: 424px) {
-  .pastebin-logo {
-    height: 15%;
-    width: 15%;
-    opacity: 0.3;
-  }
-  .logo-text {
-    font-size: 0.5rem;
-  }
-  .table {
-    font-size: 0.7rem;
-  }
-}
-
-@media only screen and (min-width: 425px) and (max-device-width: 767px) {
-  .pastebin-logo {
-    height: 15%;
-    width: 15%;
-    opacity: 0.3;
-  }
-  .logo-text {
-    font-size: 1.1rem;
-  }
-  .table {
-    font-size: 0.8rem;
-  }
+.user-icon {
+  opacity: 0.3;
+  font-size: 1.3rem;
+  margin: 0rem 0.3rem;
+  float: right;
 }
 
 .dashboardDiv {
@@ -70,6 +49,8 @@
 
 .table {
   margin-top: 0.5rem;
+  width: 100%;
+  table-layout: fixed;
 }
 
 .modalDiv {
@@ -88,4 +69,81 @@
 td {
   word-break: break-all;
   width: 10%;
+}
+
+.action-icon {
+  color: rgb(119, 209, 236);
+}
+
+.delete-icon {
+  margin-left: 1.5rem;
+}
+
+@media only screen and (min-width: 320px) and (max-device-width: 374px) {
+  .pastebin-logo {
+    height: 10%;
+    width: 10%;
+    opacity: 0.3;
+  }
+  .logo-text {
+    font-size: 0.2rem;
+  }
+  .username {
+    padding-right: 0rem;
+  }
+  .table {
+    font-size: 0.6rem;
+  }
+  .delete-icon {
+    margin-left: 0.5rem;
+  }
+  .dashboardDiv {
+    margin: 2rem auto;
+  }
+}
+
+@media only screen and (min-width: 375px) and (max-device-width: 424px) {
+  .pastebin-logo {
+    height: 15%;
+    width: 15%;
+    opacity: 0.3;
+  }
+  .logo-text {
+    font-size: 0.5rem;
+  }
+  .username {
+    padding-right: 0rem;
+  }
+  .table {
+    font-size: 0.7rem;
+  }
+  .delete-icon {
+    margin-left: 0.5rem;
+  }
+  .dashboardDiv {
+    margin: 2rem auto;
+  }
+}
+
+@media only screen and (min-width: 425px) and (max-device-width: 767px) {
+  .pastebin-logo {
+    height: 15%;
+    width: 15%;
+    opacity: 0.3;
+  }
+  .logo-text {
+    font-size: 1.1rem;
+  }
+  .username {
+    padding-right: 0rem;
+  }
+  .table {
+    font-size: 0.8rem;
+  }
+  .delete-icon {
+    margin-left: 0.5rem;
+  }
+  .dashboardDiv {
+    margin: 2rem auto;
+  }
 }
